@@ -2,6 +2,7 @@ package niteknightt.chess.lichessapi;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import niteknightt.chess.common.AppLogger;
 
 import java.io.*;
 import java.net.*;
@@ -12,7 +13,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-import niteknightt.chess.common.Logger;
 
 public class LichessInterface {
 
@@ -143,12 +143,12 @@ public class LichessInterface {
             }
             catch (UnsupportedEncodingException e) {
                 --attemptsRemaining;
-                Logger.error("Failed to communicate to this URL: " + LICHESS_API_ENDPOINT_BASE + endpoint + ": " + e.toString());
+                AppLogger.getInstance().error("Failed to communicate to this URL: " + LICHESS_API_ENDPOINT_BASE + endpoint + ": " + e.toString());
                 try { Thread.sleep(100); } catch (InterruptedException ex) { }
             }
             catch (IOException e) {
                 --attemptsRemaining;
-                Logger.error("Failed in communication with this URL: " + LICHESS_API_ENDPOINT_BASE + endpoint + ": " + e.toString());
+                AppLogger.getInstance().error("Failed in communication with this URL: " + LICHESS_API_ENDPOINT_BASE + endpoint + ": " + e.toString());
                 try { Thread.sleep(100); } catch (InterruptedException ex) { }
             }
         }
@@ -215,6 +215,12 @@ public class LichessInterface {
 
     public static void resignGame(String gameId) throws LichessApiException {
         if (!doHttpSyncPost("bot/game/" + gameId + "/resign")) {
+            throw new LichessApiException();
+        }
+    }
+
+    public static void claimVictory(String gameId) throws LichessApiException {
+        if (!doHttpSyncPost("bot/game/" + gameId + "/claim-victory")) {
             throw new LichessApiException();
         }
     }

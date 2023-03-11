@@ -108,7 +108,9 @@ public class LichessEnums {
         @SerializedName("gameState")
         GAME_STATE,
         @SerializedName("chatLine")
-        CHAT_LINE
+        CHAT_LINE,
+        @SerializedName("opponentGone")
+        OPPONENT_GONE
     }
 
     public enum VariantKey {

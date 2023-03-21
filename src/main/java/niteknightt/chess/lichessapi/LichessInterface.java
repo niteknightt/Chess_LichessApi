@@ -3,6 +3,7 @@ package niteknightt.chess.lichessapi;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import niteknightt.chess.common.AppLogger;
+import niteknightt.chess.common.Settings;
 
 import java.io.*;
 import java.net.*;
@@ -18,7 +19,7 @@ public class LichessInterface {
 
     public static String LICHESS_API_ENDPOINT_BASE = "https://lichess.org/api/";
     public static String AUTH_KEY_TEXT = "Authorization";
-    public static String AUTH_VALUE_TEXT = "Bearer lip_NkdnIybjkl2B8A1Ue85k";
+    public static String AUTH_VALUE_TEXT = "Bearer " + Settings.getInstance().getAccessToken();
     public static int DEFAULT_NUMBER_OF_ATTEMPTS = 3;
 
     public static HttpClient client = HttpClient.newHttpClient();
@@ -144,12 +145,12 @@ public class LichessInterface {
             catch (UnsupportedEncodingException e) {
                 --attemptsRemaining;
                 AppLogger.getInstance().error("Failed to communicate to this URL: " + LICHESS_API_ENDPOINT_BASE + endpoint + ": " + e.toString());
-                try { Thread.sleep(100); } catch (InterruptedException ex) { }
+                try { Thread.sleep(500); } catch (InterruptedException ex) { }
             }
             catch (IOException e) {
                 --attemptsRemaining;
                 AppLogger.getInstance().error("Failed in communication with this URL: " + LICHESS_API_ENDPOINT_BASE + endpoint + ": " + e.toString());
-                try { Thread.sleep(100); } catch (InterruptedException ex) { }
+                try { Thread.sleep(500); } catch (InterruptedException ex) { }
             }
         }
         return success;
@@ -231,7 +232,11 @@ public class LichessInterface {
         params.put("text", text);
 
         if (!doHttpSyncPost("bot/game/" + gameId + "/chat", params)) {
-            throw new LichessApiException();
+            try { Thread.sleep(500); } catch (InterruptedException ex) { }
+            params.put("text", text + " [resend]");
+            if (!doHttpSyncPost("bot/game/" + gameId + "/chat", params)) {
+                throw new LichessApiException();
+            }
         }
     }
 
@@ -241,170 +246,6 @@ public class LichessInterface {
 
     public static LichessEvent getEvent() {
         return (LichessEvent)httpSyncGetWrapper("stream/event", LichessEvent.class);
-    }
-
-    public static void getEvent1() {
-        URL url;
-        boolean done = false;
-        HttpURLConnection con = null;
-        try {
-            url = new URL(LICHESS_API_ENDPOINT_BASE + "stream/event" + "?access_token=lip_NkdnIybjkl2B8A1Ue85k");
-            con = (HttpURLConnection) url.openConnection();
-            con.setRequestProperty (AUTH_KEY_TEXT, AUTH_VALUE_TEXT);
-            con.setRequestMethod("GET");
-            int respCode = con.getResponseCode();
-            if (respCode == HttpURLConnection.HTTP_OK) {
-                while (!done) {
-                    BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), StandardCharsets.UTF_8));
-                    while (br. ready()) {
-                        String sr = br.readLine();
-                        System.out.println("Event: " + sr);
-                    }
-                    br.close();
-                    Thread.sleep(5000);
-                }
-                //Scanner s = new Scanner(con.getInputStream()).useDelimiter("\\A");
-                //String result = s.hasNext() ? s.next() : "";
-            }
-        }
-        catch (Exception e) {
-            System.out.print(e);
-        }
-    }
-
-    public static void getEvent2() {
-        boolean done = false;
-        try {
-            URL oracle = new URL(LICHESS_API_ENDPOINT_BASE + "stream/event" + "?access_token=lip_NkdnIybjkl2B8A1Ue85k");
-            URLConnection yc = oracle.openConnection();
-            yc.setRequestProperty (AUTH_KEY_TEXT, AUTH_VALUE_TEXT);
-            while (!done) {
-                BufferedReader in = new BufferedReader(new InputStreamReader(
-                        yc.getInputStream()));
-                String inputLine;
-                while ((inputLine = in.readLine()) != null)
-                    System.out.println(inputLine);
-                in.close();
-            }
-            Thread.sleep(5000);
-        }
-        catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-
-    public static LichessChallenge checkForChallenge() {
-        try {
-            //HttpClient client = HttpClient.newHttpClient();
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("https://lichess.org/api/challenge"))
-                    .GET() // GET is default
-                    .setHeader("Authorization", "Bearer lip_NkdnIybjkl2B8A1Ue85k")
-                    .build();
-
-
-            client.sendAsync(request, HttpResponse.BodyHandlers.ofString()).thenAccept(response -> {
-
-                if (response.body() == null) {
-                    System.out.println("Respponse body null");
-                }
-                System.out.println("Respponse body unnull");
-                JsonObject jobj = new Gson().fromJson(response.body(), JsonObject.class);
-                if (jobj.has("type")) {
-                    String eventType = jobj.get("type").getAsString();
-                    if (eventType.equals("challenge")) {
-                        String challengeStr = jobj.get("challenge").getAsString();
-                        LichessChallenge challenge = new Gson().fromJson(challengeStr, LichessChallenge.class);
-                        System.out.println(challenge);
-                    }
-                }
-
-            });
-
-/*
-            CompletableFuture<HttpResponse<String>> response =
-                    client.sendAsync(request, HttpResponse.BodyHandlers.ofString());
-
-            String result = response.thenApply(HttpResponse::body).get(15, TimeUnit.SECONDS);
-
-            System.out.println(result);
-*/
-/*
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            if (response.body() == null) {
-                return null;
-            }
-            JsonObject jobj = new Gson().fromJson(response.body(), JsonObject.class);
-            if (jobj.has("type")) {
-                String eventType = jobj.get("type").getAsString();
-                if (eventType.equals("challenge")) {
-                    String challengeStr = jobj.get("challenge").getAsString();
-                    LichessChallenge challenge = new Gson().fromJson(challengeStr, LichessChallenge.class);
-                    return challenge;
-                }
-            }
-            */
-            return null;
-        } catch (Exception e) {
-            System.out.println("Exception: " + e);
-            return null;
-        }
-    }
-
-    public static void getGameState() {
-        try {
-            //HttpClient client = HttpClient.newHttpClient();
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("https://lichess.org/api/board/game/stream/XfUeCzukk3lm"))
-                    .GET() // GET is default
-                    .setHeader("Authorization", "Bearer lip_NkdnIybjkl2B8A1Ue85k")
-                    .build();
-
-
-            client.sendAsync(request, HttpResponse.BodyHandlers.ofString()).thenAccept(response -> {
-
-                if (response.body() == null) {
-                    System.out.println("Respponse body null");
-                }
-                System.out.println("Respponse body unnull");
-                JsonObject jobj = new Gson().fromJson(response.body(), JsonObject.class);
-                if (jobj.has("type")) {
-                    String eventType = jobj.get("type").getAsString();
-                    if (eventType.equals("challenge")) {
-                        String challengeStr = jobj.get("challenge").getAsString();
-                        LichessChallenge challenge = new Gson().fromJson(challengeStr, LichessChallenge.class);
-                        System.out.println(challenge);
-                    }
-                }
-
-            });
-
-/*
-            CompletableFuture<HttpResponse<String>> response =
-                    client.sendAsync(request, HttpResponse.BodyHandlers.ofString());
-
-            String result = response.thenApply(HttpResponse::body).get(15, TimeUnit.SECONDS);
-
-            System.out.println(result);
-*/
-/*
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            if (response.body() == null) {
-                return null;
-            }
-            JsonObject jobj = new Gson().fromJson(response.body(), JsonObject.class);
-            if (jobj.has("type")) {
-                String eventType = jobj.get("type").getAsString();
-                if (eventType.equals("challenge")) {
-                    String challengeStr = jobj.get("challenge").getAsString();
-                    LichessChallenge challenge = new Gson().fromJson(challengeStr, LichessChallenge.class);
-                    return challenge;
-                }
-            }
-            */
-        } catch (Exception e) {
-            System.out.println("Exception: " + e);
-        }
     }
 
 }

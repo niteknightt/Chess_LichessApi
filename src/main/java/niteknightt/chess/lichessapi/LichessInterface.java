@@ -126,21 +126,33 @@ public class LichessInterface {
             }
         }
 
+        int responseCode = 0;
+        try {
+            responseCode = conn.getResponseCode();
+        }
+        catch (IOException ex) {
+            AppLogger.getInstance().error("Failed to get response code for this URL: " + LICHESS_API_ENDPOINT_BASE + endpoint + ": " + ex.toString());
+            return false;
+        }
+
         int attemptsRemaining = numAttempts;
         boolean success = false;
         while (!success && attemptsRemaining > 0) {
             try {
-                Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-                in.getClass(); // This line here just to avoid compiler warning.
+                if (responseCode == 400) {
+                    AppLogger.getInstance().error("Got 400 response code from this URL: " + LICHESS_API_ENDPOINT_BASE + endpoint);
+                    Reader in = new BufferedReader(new InputStreamReader(conn.getErrorStream(), "UTF-8"));
+                    char[] buff = new char[1000];
+                    int numChars = in.read(buff);
+                    if (numChars > 0) {
+                        AppLogger.getInstance().error(new String(buff));
+                    }
+                }
+                else {
+                    Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+                    in.getClass(); // This line here just to avoid compiler warning.
+                }
                 success = true;
-
-                //for (int c; (c = in.read()) >= 0;)
-                //    System.out.print((char)c);
-
-                //StringBuilder sb = new StringBuilder();
-                //for (int c; (c = in.read()) >= 0;)
-                //    sb.append((char)c);
-                //String response = sb.toString();
             }
             catch (UnsupportedEncodingException e) {
                 --attemptsRemaining;

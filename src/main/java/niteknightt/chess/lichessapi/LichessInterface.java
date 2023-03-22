@@ -21,6 +21,7 @@ public class LichessInterface {
     public static String AUTH_KEY_TEXT = "Authorization";
     public static String AUTH_VALUE_TEXT = "Bearer " + Settings.getInstance().getAccessToken();
     public static int DEFAULT_NUMBER_OF_ATTEMPTS = 3;
+    public static int MAX_CHAT_TEXT_LENGTH = 140;
 
     public static HttpClient client = HttpClient.newHttpClient();
 
@@ -239,6 +240,11 @@ public class LichessInterface {
     }
 
     public static void writeChat(String gameId, String text) throws LichessApiException {
+        if (text.length() > MAX_CHAT_TEXT_LENGTH) {
+            AppLogger.getInstance().error("The following chat was more than " + MAX_CHAT_TEXT_LENGTH + " so it was truncated before being sent");
+            AppLogger.getInstance().error(text);
+            text = text.substring(0, MAX_CHAT_TEXT_LENGTH);
+        }
         Map<String, String> params = new HashMap<String, String>();
         params.put("room", "player");
         params.put("text", text);

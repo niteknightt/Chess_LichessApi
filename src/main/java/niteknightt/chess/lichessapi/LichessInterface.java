@@ -266,4 +266,7 @@ public class LichessInterface {
         return (LichessEvent)httpSyncGetWrapper("stream/event", LichessEvent.class);
     }
 
+    public static LichessUserList autocompleteUsernames(String startText) {
+        return (LichessUserList)httpSyncGetWrapper("player/autocomplete?term=aaa&object=true&friend=false", LichessUserList.class);
+    }
 }

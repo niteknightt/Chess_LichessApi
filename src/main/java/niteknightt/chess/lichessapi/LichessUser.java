@@ -1,6 +1,6 @@
 package niteknightt.chess.lichessapi;
 
-public class LichessUser {
+public class LichessUser extends LichessApiObject {
     public String id;
     public String name;
     public String title;

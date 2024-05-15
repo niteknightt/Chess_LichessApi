@@ -267,6 +267,6 @@ public class LichessInterface {
     }
 
     public static LichessUserList autocompleteUsernames(String startText) {
-        return (LichessUserList)httpSyncGetWrapper("player/autocomplete?term=aaa&object=true&friend=false", LichessUserList.class);
+        return (LichessUserList)httpSyncGetWrapper("player/autocomplete?term=" + startText + "&object=true&friend=false", LichessUserList.class);
     }
 }

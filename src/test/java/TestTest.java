@@ -9,9 +9,23 @@ public class TestTest {
 
     @Test
     public void testTest() {
-        Settings.createInstance(Enums.SettingsType.BOTTERBOT);
-        AppLogger.createInstance(Enums.SettingsType.NITEKNIGHTTBOT, Enums.LogLevel.DEBUG, true);
-        LichessUserList userlist =  LichessInterface.autocompleteUsernames("aaa");
+        try {
+            Settings.createInstance(Enums.SettingsType.COMMON);
+        }
+        catch (Exception ex) {
+            System.out.println(ex);
+            System.out.println(ex.getMessage());
+            System.out.println(ex.getStackTrace());
+        }
+        try {
+        AppLogger.createInstance(Enums.SettingsType.COMMON, Enums.LogLevel.DEBUG, false);
+        }
+        catch (Exception ex) {
+            System.out.println(ex);
+            System.out.println(ex.getMessage());
+            System.out.println(ex.getStackTrace());
+        }
+        LichessUserList userlist =  LichessInterface.autocompleteUsernames("EliHa");
         System.out.println("At end");
     }
 }

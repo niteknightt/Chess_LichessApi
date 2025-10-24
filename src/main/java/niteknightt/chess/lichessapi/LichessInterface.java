@@ -27,6 +27,8 @@ public class LichessInterface {
 
     public static String doHttpSyncGet(String endpoint) {
         try {
+            Settings set = Settings.getInstance();
+            String auth = set.getAccessToken();
             //HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(LICHESS_API_ENDPOINT_BASE + endpoint))

@@ -3,8 +3,15 @@ plugins {
     id 'maven-publish'
 }
 
-group 'niteknightt.chess'
-version '0.1'
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+group = 'niteknightt.chess'
+version = '0.3.000'
+archivesBaseName = 'chess-lichessapi'
 
 repositories {
     mavenCentral()
@@ -28,11 +35,11 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
     implementation 'com.google.code.gson:gson:2.10.1'
-    implementation 'niteknightt.chess:common:0.2.018'
-    implementation 'niteknightt.chess:uciclientmod:0.3'
+    implementation 'niteknightt.chess:common:0.3.001'
+    implementation 'niteknightt.chess:uciclientmod:0.4.000'
 }
 
 test {
@@ -40,22 +47,32 @@ test {
 }
 
 publishing {
+    publications {
+        gpr(MavenPublication) {
+            artifactId = 'lichessapi'
+            from(components.java)
+        }
+    }
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/niteknightt/chess_lichessapi")
+            url = uri("https://maven.pkg.github.com/niteknightt/Chess_LichessApi")
             credentials {
                 username = System.getenv("NN_GITHUB_USER")
                 password = System.getenv("NN_GITHUB_ACCESS_TOKEN")
             }
         }
     }
-    publications {
-        gpr(MavenPublication) {
-            groupId='niteknightt.chess'
-            artifactId='lichessapi'
-            version='0.2.009'
-            from(components.java)
-        }
+}
+
+// --- Load environment variables from .env and apply to tests ---
+def envProps = new Properties()
+def envFile = file(".env")
+if (envFile.exists()) {
+    envFile.withInputStream { envProps.load(it) }
+    tasks.withType(Test) {
+        environment envProps
     }
+} else {
+    println ".env file not found — skipping test environment setup"
 }

@@ -6,16 +6,16 @@ import java.util.List;
  * Details of a game exported from Lichess.
  */
 public class ExportedGame {
-    String id;
-    boolean rated;
-    String variant;
-    String speed;
-    long createdAt;
-    long lastMoveAt;
-    String status;
-    String source;
-    Players players;
-    String fullId;
-    String winner;
-    String moves;
+    public String id;
+    public boolean rated;
+    public String variant;
+    public String speed;
+    public long createdAt;
+    public long lastMoveAt;
+    public String status;
+    public String source;
+    public Players players;
+    public String fullId;
+    public String winner;
+    public String moves;
 }

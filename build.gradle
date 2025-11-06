@@ -10,7 +10,7 @@ java {
 }
 
 group = 'niteknightt.chess'
-version = '0.3.000'
+version = '0.3.001'
 archivesBaseName = 'chess-lichessapi'
 
 repositories {
@@ -56,7 +56,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/niteknightt/Chess_LichessApi")
+            url = uri("https://maven.pkg.github.com/niteknightt/chess_lichessapi")
             credentials {
                 username = System.getenv("NN_GITHUB_USER")
                 password = System.getenv("NN_GITHUB_ACCESS_TOKEN")

@@ -1,0 +1,547 @@
+[
+  {
+    "id": "elihaber",
+    "username": "EliHaber",
+    "perfs": {
+      "bullet": {
+        "games": 12,
+        "rating": 1010,
+        "rd": 178,
+        "prog": -31,
+        "prov": true
+      },
+      "blitz": {
+        "games": 125,
+        "rating": 1166,
+        "rd": 58,
+        "prog": -57
+      },
+      "rapid": {
+        "games": 571,
+        "rating": 1542,
+        "rd": 46,
+        "prog": 28
+      },
+      "classical": {
+        "games": 3,
+        "rating": 1392,
+        "rd": 289,
+        "prog": 0,
+        "prov": true
+      },
+      "correspondence": {
+        "games": 0,
+        "rating": 1500,
+        "rd": 500,
+        "prog": 0,
+        "prov": true
+      },
+      "puzzle": {
+        "games": 16094,
+        "rating": 1787,
+        "rd": 98,
+        "prog": 0
+      },
+      "storm": {
+        "runs": 904,
+        "score": 30
+      },
+      "racer": {
+        "runs": 60,
+        "score": 36
+      },
+      "streak": {
+        "runs": 341,
+        "score": 42
+      }
+    },
+    "createdAt": 1576658546338,
+    "seenAt": 1761418529289,
+    "playTime": {
+      "total": 629786,
+      "tv": 0
+    },
+    "url": "https://lichess.org/@/EliHaber",
+    "count": {
+      "all": 958,
+      "rated": 711,
+      "draw": 29,
+      "loss": 515,
+      "win": 414,
+      "bookmark": 1,
+      "playing": 0,
+      "import": 20,
+      "me": 0
+    },
+    "followable": true,
+    "following": false,
+    "blocking": false
+  },
+  {
+    "id": "niteknightt",
+    "username": "niteknightt",
+    "perfs": {
+      "bullet": {
+        "games": 61,
+        "rating": 1006,
+        "rd": 177,
+        "prog": 111,
+        "prov": true
+      },
+      "blitz": {
+        "games": 495,
+        "rating": 1218,
+        "rd": 146,
+        "prog": 53,
+        "prov": true
+      },
+      "rapid": {
+        "games": 822,
+        "rating": 1561,
+        "rd": 146,
+        "prog": -16,
+        "prov": true
+      },
+      "classical": {
+        "games": 20,
+        "rating": 1817,
+        "rd": 194,
+        "prog": -56,
+        "prov": true
+      },
+      "correspondence": {
+        "games": 0,
+        "rating": 1500,
+        "rd": 500,
+        "prog": 0,
+        "prov": true
+      },
+      "puzzle": {
+        "games": 5406,
+        "rating": 2057,
+        "rd": 154,
+        "prog": 0,
+        "prov": true
+      },
+      "storm": {
+        "runs": 4264,
+        "score": 28
+      },
+      "racer": {
+        "runs": 1170,
+        "score": 49
+      },
+      "streak": {
+        "runs": 735,
+        "score": 39
+      }
+    },
+    "flair": "nature.dog-face",
+    "patron": true,
+    "patronColor": 6,
+    "createdAt": 1613860464100,
+    "profile": {},
+    "seenAt": 1754554051052,
+    "playTime": {
+      "total": 1202400,
+      "tv": 0
+    },
+    "url": "https://lichess.org/@/niteknightt",
+    "count": {
+      "all": 1491,
+      "rated": 1398,
+      "draw": 73,
+      "loss": 705,
+      "win": 713,
+      "bookmark": 0,
+      "playing": 0,
+      "import": 5,
+      "me": 0
+    },
+    "followable": true,
+    "following": false,
+    "blocking": false
+  },
+  {
+    "id": "niteknighttbot",
+    "username": "niteknighttbot",
+    "perfs": {
+      "bullet": {
+        "games": 286,
+        "rating": 2612,
+        "rd": 222,
+        "prog": 18,
+        "prov": true
+      },
+      "blitz": {
+        "games": 105,
+        "rating": 2647,
+        "rd": 225,
+        "prog": 0,
+        "prov": true
+      },
+      "rapid": {
+        "games": 36,
+        "rating": 2489,
+        "rd": 237,
+        "prog": 127,
+        "prov": true
+      },
+      "classical": {
+        "games": 5,
+        "rating": 2158,
+        "rd": 288,
+        "prog": 0,
+        "prov": true
+      },
+      "correspondence": {
+        "games": 0,
+        "rating": 2000,
+        "rd": 500,
+        "prog": 0,
+        "prov": true
+      }
+    },
+    "title": "BOT",
+    "createdAt": 1652004405524,
+    "profile": {
+      "flag": "IL",
+      "location": "Jerusalem",
+      "bio": "I am niteknighttbot, created by @niteknightt.\r\nThe plan is that I will be an adaptive, instructive bot .\r\nI will play at the level of my opponent.\r\nI will provide feedback in the chat about the moves my opponent plays.\r\nHowever, I'm not yet there. For now, I can just play for fun.\r\nStay tuned for improvements!"
+    },
+    "seenAt": 1679407091566,
+    "playTime": {
+      "total": 153835,
+      "tv": 7155,
+      "human": 41135
+    },
+    "url": "https://lichess.org/@/niteknighttbot",
+    "count": {
+      "all": 724,
+      "rated": 514,
+      "draw": 186,
+      "loss": 354,
+      "win": 184,
+      "bookmark": 0,
+      "playing": 0,
+      "import": 0,
+      "me": 0
+    },
+    "followable": true,
+    "following": false,
+    "blocking": false
+  },
+  {
+    "id": "massterofmayhem",
+    "username": "MassterofMayhem",
+    "perfs": {
+      "ultraBullet": {
+        "games": 113,
+        "rating": 2073,
+        "rd": 93,
+        "prog": -33
+      },
+      "bullet": {
+        "games": 5595,
+        "rating": 3000,
+        "rd": 102,
+        "prog": 45
+      },
+      "blitz": {
+        "games": 41823,
+        "rating": 2650,
+        "rd": 45,
+        "prog": 20
+      },
+      "rapid": {
+        "games": 4097,
+        "rating": 2600,
+        "rd": 76,
+        "prog": 1
+      },
+      "classical": {
+        "games": 1395,
+        "rating": 2518,
+        "rd": 139,
+        "prog": 88,
+        "prov": true
+      },
+      "correspondence": {
+        "games": 0,
+        "rating": 1500,
+        "rd": 500,
+        "prog": 0,
+        "prov": true
+      },
+      "chess960": {
+        "games": 174,
+        "rating": 2302,
+        "rd": 68,
+        "prog": 15
+      },
+      "kingOfTheHill": {
+        "games": 6,
+        "rating": 1925,
+        "rd": 262,
+        "prog": 0,
+        "prov": true
+      },
+      "threeCheck": {
+        "games": 13,
+        "rating": 1539,
+        "rd": 220,
+        "prog": -106,
+        "prov": true
+      },
+      "crazyhouse": {
+        "games": 61,
+        "rating": 2085,
+        "rd": 76,
+        "prog": -1
+      },
+      "puzzle": {
+        "games": 129,
+        "rating": 2667,
+        "rd": 127,
+        "prog": 0,
+        "prov": true
+      },
+      "storm": {
+        "runs": 2,
+        "score": 59
+      },
+      "racer": {
+        "runs": 4,
+        "score": 44
+      }
+    },
+    "title": "IM",
+    "patron": true,
+    "patronColor": 10,
+    "createdAt": 1543890680142,
+    "profile": {
+      "flag": "US",
+      "bio": "International Master, Author of Mayhem in the Morra.  https://en.wikipedia.org/wiki/Marc_Esserman\r\nFor lesson material visit my Patreon page at https://www.patreon.com/MasterofMayhem.  I will teach you to play exciting, dynamic, fearless chess! \r\nContact: esserman@post.harvard.edu\r\nCheck out my livestream at https://www.twitch.tv/whyyyyyyysoserious",
+      "realName": "Marc Esserman",
+      "fideRating": 2438,
+      "uscfRating": 2550,
+      "links": "https://www.instagram.com/masterofmayyhem/?hl=en\r\nhttps://www.youtube.com/user/mrlang65\r\nhttps://www.amazon.com/Mayhem-Morra-Marc-Esserman/dp/1907982205\r\nhttp://www.chessgames.com/player/marc_esserman.html\r\nhttp://www.chessgames.com/perl/chessgame?gid=1630005\r\nhttp://www.chessgames.com/perl/chessgame?gid=1814426\r\nhttp://www.chessgames.com/perl/chessgame?gid=1609666\r\nhttp://www.chessgames.com/perl/chessgame?gid=1814884\r\nhttp://www.chessgames.com/perl/chessgame?gid=1645109\r\nhttp://www.chessgames.com/perl/chessgame?gid=1609652"
+    },
+    "seenAt": 1761425696842,
+    "playTime": {
+      "total": 26294944,
+      "tv": 4098693
+    },
+    "url": "https://lichess.org/@/MassterofMayhem",
+    "count": {
+      "all": 56610,
+      "rated": 53306,
+      "draw": 4011,
+      "loss": 21164,
+      "win": 31435,
+      "bookmark": 0,
+      "playing": 0,
+      "import": 5,
+      "me": 0
+    },
+    "streamer": {
+      "twitch": {
+        "channel": "https://www.twitch.tv/whyyyyyyysoserious"
+      }
+    },
+    "followable": true,
+    "following": false,
+    "blocking": false
+  },
+  {
+    "id": "zefcat",
+    "username": "ZefCat",
+    "perfs": {
+      "ultraBullet": {
+        "games": 98,
+        "rating": 1917,
+        "rd": 188,
+        "prog": 113,
+        "prov": true
+      },
+      "bullet": {
+        "games": 22526,
+        "rating": 2443,
+        "rd": 45,
+        "prog": -43
+      },
+      "blitz": {
+        "games": 3573,
+        "rating": 2195,
+        "rd": 45,
+        "prog": 18
+      },
+      "rapid": {
+        "games": 1368,
+        "rating": 2229,
+        "rd": 50,
+        "prog": -10
+      },
+      "classical": {
+        "games": 33,
+        "rating": 2153,
+        "rd": 187,
+        "prog": 416,
+        "prov": true
+      },
+      "correspondence": {
+        "games": 0,
+        "rating": 1500,
+        "rd": 500,
+        "prog": 0,
+        "prov": true
+      },
+      "chess960": {
+        "games": 24,
+        "rating": 1632,
+        "rd": 253,
+        "prog": -60,
+        "prov": true
+      },
+      "kingOfTheHill": {
+        "games": 3,
+        "rating": 1509,
+        "rd": 343,
+        "prog": 0,
+        "prov": true
+      },
+      "threeCheck": {
+        "games": 8,
+        "rating": 1772,
+        "rd": 266,
+        "prog": 0,
+        "prov": true
+      },
+      "antichess": {
+        "games": 4,
+        "rating": 1390,
+        "rd": 297,
+        "prog": 0,
+        "prov": true
+      },
+      "atomic": {
+        "games": 475,
+        "rating": 1629,
+        "rd": 203,
+        "prog": 45,
+        "prov": true
+      },
+      "horde": {
+        "games": 6,
+        "rating": 1651,
+        "rd": 302,
+        "prog": 0,
+        "prov": true
+      },
+      "racingKings": {
+        "games": 4,
+        "rating": 1632,
+        "rd": 304,
+        "prog": 0,
+        "prov": true
+      },
+      "crazyhouse": {
+        "games": 420,
+        "rating": 2152,
+        "rd": 133,
+        "prog": 344,
+        "prov": true
+      },
+      "puzzle": {
+        "games": 1325,
+        "rating": 2404,
+        "rd": 102,
+        "prog": 0
+      },
+      "storm": {
+        "runs": 1098,
+        "score": 67
+      },
+      "racer": {
+        "runs": 2974,
+        "score": 91
+      },
+      "streak": {
+        "runs": 23,
+        "score": 65
+      }
+    },
+    "flair": "nature.rat",
+    "patron": true,
+    "patronColor": 8,
+    "createdAt": 1508812984808,
+    "profile": {
+      "flag": "US",
+      "bio": "I like to make chess",
+      "realName": "Sara Herman",
+      "uscfRating": 1357,
+      "links": "https://www.twitch.tv/zefcatt https://discord.gg/AedEVqAG"
+    },
+    "seenAt": 1761430942597,
+    "playTime": {
+      "total": 5494938,
+      "tv": 45070
+    },
+    "url": "https://lichess.org/@/ZefCat",
+    "count": {
+      "all": 30215,
+      "rated": 28568,
+      "draw": 1660,
+      "loss": 13719,
+      "win": 14836,
+      "bookmark": 4,
+      "playing": 0,
+      "import": 26,
+      "me": 0
+    },
+    "streamer": {
+      "twitch": {
+        "channel": "https://www.twitch.tv/Zefcatt"
+      }
+    },
+    "followable": true,
+    "following": false,
+    "blocking": false
+  },
+  {
+    "id":"superpower2011",
+    "username":"SuperPower2011",
+    "perfs":{
+      "bullet":{"games":251,"rating":2879,"rd":45,"prog":21},
+      "blitz":{"games":70,"rating":2626,"rd":106,"prog":40},
+      "rapid":{"games":0,"rating":1500,"rd":500,"prog":0,"prov":true},
+      "classical":{"games":0,"rating":1500,"rd":500,"prog":0,"prov":true},
+      "correspondence":{"games":0,"rating":1500,"rd":500,"prog":0,"prov":true},
+      "puzzle":{"games":449,"rating":2882,"rd":208,"prog":0,"prov":true},
+      "racer":{"runs":66,"score":113},"streak":{"runs":1,"score":55}
+    },
+    "title":"FM",
+    "createdAt":1687686886641,
+    "seenAt":1761565691115,
+    "playTime":{"total":40794,"tv":864},
+    "url":"https://lichess.org/@/SuperPower2011",
+    "playing":"https://lichess.org/oIMzJtLG/white",
+    "count":{"all":364,"rated":321,"draw":22,"loss":162,"win":180,"bookmark":0,"playing":1,"import":44,"me":0},
+    "followable":true,
+    "following":false,
+    "blocking":false
+  }
+]
+
+
+
+[
+  {
+    "name":"UltraBullet",
+    "points":[[2024,5,22,1567],[2025,9,21,2007],[2025,9,31,1853]]
+  },
+  {
+    "name":"Bullet",
+    "points":[[2024,5,22,1130],[2025,8,8,1202],[2025,9,17,1203],[2025,9,21,1477],[2025,9,31,1616]]
+  },
+  {"name":"Blitz","points":[]},{"name":"Rapid","points":[]},{"name":"Classical","points":[]},{"name":"Correspondence","points":[]},{"name":"Crazyhouse","points":[]},{"name":"Chess960","points":[]},{"name":"King of the Hill","points":[]},{"name":"Three-check","points":[]},{"name":"Antichess","points":[]},{"name":"Atomic","points":[]},{"name":"Horde","points":[]},{"name":"Racing Kings","points":[]},{"name":"Puzzles","points":[]}]

@@ -1,16 +1,16 @@
 package niteknightt.chess.lichessapi;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import niteknightt.chess.common.AppLogger;
 import niteknightt.chess.common.Settings;
+import niteknightt.chess.lichessapi.objects.UserProfile;
 
 import java.io.*;
+import java.lang.reflect.Type;
 import java.net.*;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,6 +34,7 @@ public class LichessInterface {
                     .uri(URI.create(LICHESS_API_ENDPOINT_BASE + endpoint))
                     .GET()
                     .setHeader(AUTH_KEY_TEXT, AUTH_VALUE_TEXT)
+                    .header("Accept", "application/x-ndjson")
                     .build();
 
             HttpResponse<String> response =  client.send(request, HttpResponse.BodyHandlers.ofString());
@@ -171,36 +172,34 @@ public class LichessInterface {
         return success;
     }
 
-    public static LichessApiObject httpSyncGetWrapper(String endpoint, Class<?> aclass) {
+    public static <T> T httpSyncGetWrapper(String endpoint, Type responseType) {
         String response = doHttpSyncGet(endpoint);
 
         try {
-            return (LichessApiObject)new Gson().fromJson(response, aclass);
+            return new Gson().fromJson(response, responseType);
         }
         catch (Exception e) {
-            System.out.println("Exception while parsing response to sync get endpoint " + endpoint + " using class " + aclass);
+            System.out.println("Exception while parsing response to sync get endpoint " + endpoint + " using response type " + responseType);
             System.out.println(e.getMessage());
             System.out.println(e.getStackTrace());
             return null;
         }
     }
 
-    public static LichessApiObject[] httpSyncGetWrapperForList(String endpoint, Class<?> aclass) {
-        String response = doHttpSyncGet(endpoint);
-
-        try {
-            return (LichessApiObject[])new Gson().fromJson(response, aclass);
-        }
-        catch (Exception e) {
-            System.out.println("Exception while parsing response to sync get endpoint " + endpoint + " using class " + aclass);
-            System.out.println(e.getMessage());
-            System.out.println(e.getStackTrace());
-            return null;
-        }
+    public static UserProfile getProfile() {
+        return (UserProfile)httpSyncGetWrapper("account", UserProfile.class);
     }
 
-    public static LichessProfile getProfile() {
-        return (LichessProfile)httpSyncGetWrapper("account", LichessProfile.class);
+    public static UserProfile getUserPublicData(String username) {
+        return getUserPublicData(username, false);
+    }
+
+    public static UserProfile getUserPublicData(String username, boolean includeTrophies) {
+        String url = "user/" + username;
+        if (includeTrophies) {
+            url += "?trophies=true";
+        }
+        return (UserProfile)httpSyncGetWrapper(url, UserProfile.class);
     }
 
     public static void acceptChallenge(String challengeId) throws LichessApiException {
@@ -261,7 +260,7 @@ public class LichessInterface {
     }
 
     public static LichessChatItem[] fetchGameChat(String gameId) {
-        return (LichessChatItem[])httpSyncGetWrapperForList("bot/game/" + gameId + "/chat", LichessChatItem[].class);
+        return (LichessChatItem[])httpSyncGetWrapper("bot/game/" + gameId + "/chat", LichessChatItem[].class);
     }
 
     public static LichessEvent getEvent() {

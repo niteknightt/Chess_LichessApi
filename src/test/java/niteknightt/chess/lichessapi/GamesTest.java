@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 public class GamesTest {
@@ -20,6 +21,15 @@ public class GamesTest {
         Settings.createInstance(Enums.SettingsType.COMMON);
         AppLogger.createInstance(Enums.SettingsType.COMMON, Enums.LogLevel.DEBUG, false);
         ExportedGame game = Games.exportLastGameOfAUser(userForTest1);
+        System.out.println("sdf");
+    }
+
+    @Test
+    public void testExportLastGamesOfAUser() {
+        String userForTest1 = "elihaber";
+        Settings.createInstance(Enums.SettingsType.COMMON);
+        AppLogger.createInstance(Enums.SettingsType.COMMON, Enums.LogLevel.DEBUG, false);
+        List<ExportedGame> games = Games.exportLastGamesOfAUser(userForTest1, 10);
         System.out.println("sdf");
     }
 

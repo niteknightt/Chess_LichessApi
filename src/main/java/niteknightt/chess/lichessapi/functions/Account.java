@@ -6,20 +6,20 @@ import niteknightt.chess.lichessapi.objects.*;
 public class Account {
 
     public static UserProfile getMyProfile() {
-        return (UserProfile) LichessInterface.httpSyncGetWrapper("account", UserProfile.class);
+        return (UserProfile) LichessInterface.httpSyncGetWrapper("account", new StandardJsonParser<>(UserProfile.class));
     }
 
     public static String getMyEmailAddress() {
-        Email email = (Email)LichessInterface.httpSyncGetWrapper("account/email", Email.class);
+        Email email = (Email)LichessInterface.httpSyncGetWrapper("account/email", new StandardJsonParser<>(Email.class));
         return email == null ? null : email.email;
     }
 
     public static PrefsAndLang getMyPreferences() {
-        return (PrefsAndLang)LichessInterface.httpSyncGetWrapper("account/preferences", PrefsAndLang.class);
+        return (PrefsAndLang)LichessInterface.httpSyncGetWrapper("account/preferences", new StandardJsonParser<>(PrefsAndLang.class));
     }
 
     public static boolean getMyKidModeStatus() {
-        KidModeStatus kidModeStatus = (KidModeStatus)LichessInterface.httpSyncGetWrapper("account/kid", KidModeStatus.class);
+        KidModeStatus kidModeStatus = (KidModeStatus)LichessInterface.httpSyncGetWrapper("account/kid", new StandardJsonParser<>(KidModeStatus.class));
         return kidModeStatus == null ? false : kidModeStatus.kid;
     }
 
@@ -38,6 +38,6 @@ public class Account {
             endpoint += (timestampAdded ? "&" : "");
             endpoint += "nb=" + numEvents;
         }
-        return (Timeline) LichessInterface.httpSyncGetWrapper(endpoint, Timeline.class);
+        return (Timeline) LichessInterface.httpSyncGetWrapper(endpoint, new StandardJsonParser<>(Timeline.class));
     }
 }

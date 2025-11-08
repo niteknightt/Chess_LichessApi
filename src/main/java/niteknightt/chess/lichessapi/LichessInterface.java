@@ -172,14 +172,14 @@ public class LichessInterface {
         return success;
     }
 
-    public static <T> T httpSyncGetWrapper(String endpoint, Type responseType) {
+    public static <R> R httpSyncGetWrapper(String endpoint, ResponseParser<R> parser) {
         String response = doHttpSyncGet(endpoint);
 
         try {
-            return new Gson().fromJson(response, responseType);
+            return parser.parse(response);
         }
         catch (Exception e) {
-            System.out.println("Exception while parsing response to sync get endpoint " + endpoint + " using response type " + responseType);
+            System.out.println("Exception while parsing response to sync get endpoint " + endpoint + " using response type " + parser);
             System.out.println(e.getMessage());
             System.out.println(e.getStackTrace());
             return null;
@@ -187,7 +187,7 @@ public class LichessInterface {
     }
 
     public static UserProfile getProfile() {
-        return (UserProfile)httpSyncGetWrapper("account", UserProfile.class);
+        return (UserProfile)httpSyncGetWrapper("account", new StandardJsonParser<>(UserProfile.class));
     }
 
     public static UserProfile getUserPublicData(String username) {
@@ -199,7 +199,7 @@ public class LichessInterface {
         if (includeTrophies) {
             url += "?trophies=true";
         }
-        return (UserProfile)httpSyncGetWrapper(url, UserProfile.class);
+        return (UserProfile)httpSyncGetWrapper(url, new StandardJsonParser<>(UserProfile.class));
     }
 
     public static void acceptChallenge(String challengeId) throws LichessApiException {
@@ -260,14 +260,14 @@ public class LichessInterface {
     }
 
     public static LichessChatItem[] fetchGameChat(String gameId) {
-        return (LichessChatItem[])httpSyncGetWrapper("bot/game/" + gameId + "/chat", LichessChatItem[].class);
+        return (LichessChatItem[])httpSyncGetWrapper("bot/game/" + gameId + "/chat", new StandardJsonParser<>(LichessChatItem[].class));
     }
 
     public static LichessEvent getEvent() {
-        return (LichessEvent)httpSyncGetWrapper("stream/event", LichessEvent.class);
+        return (LichessEvent)httpSyncGetWrapper("stream/event", new StandardJsonParser<>(LichessEvent.class));
     }
 
     public static LichessUserList autocompleteUsernames(String startText) {
-        return (LichessUserList)httpSyncGetWrapper("player/autocomplete?term=" + startText + "&object=true&friend=false", LichessUserList.class);
+        return (LichessUserList)httpSyncGetWrapper("player/autocomplete?term=" + startText + "&object=true&friend=false", new StandardJsonParser<>(LichessUserList.class));
     }
 }

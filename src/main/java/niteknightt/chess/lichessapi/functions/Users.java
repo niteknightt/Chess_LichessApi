@@ -3,6 +3,7 @@ package niteknightt.chess.lichessapi.functions;
 import com.google.gson.reflect.TypeToken;
 import niteknightt.chess.lichessapi.LichessInterface;
 import niteknightt.chess.lichessapi.LichessUsersEnums;
+import niteknightt.chess.lichessapi.StandardJsonParser;
 import niteknightt.chess.lichessapi.objects.*;
 
 import java.lang.reflect.Type;
@@ -55,7 +56,7 @@ public class Users {
 
     public static UserStatus[] getRealTimeUserStatus(List<String> users, boolean withSignal) {
         String endpoint = buildBasicEndpoint(users, withSignal);
-        return LichessInterface.httpSyncGetWrapper(endpoint, userStatusArray);
+        return LichessInterface.httpSyncGetWrapper(endpoint, new StandardJsonParser<>(userStatusArray));
     }
 
     public static UserStatus[] getRealTimeUserStatusWithGameIds(String user) {
@@ -73,7 +74,7 @@ public class Users {
     public static UserStatus[] getRealTimeUserStatusWithGameIds(List<String> users, boolean withSignal) {
         String endpoint = buildBasicEndpoint(users, withSignal);
         endpoint += "&withGameIds=true";
-        return LichessInterface.httpSyncGetWrapper(endpoint, userStatusArray);
+        return LichessInterface.httpSyncGetWrapper(endpoint, new StandardJsonParser<>(userStatusArray));
     }
 
     public static UserStatus[] getRealTimeUserStatusWithGameMetas(String user) {
@@ -91,15 +92,15 @@ public class Users {
     public static UserStatus[] getRealTimeUserStatusWithGameMetas(List<String> users, boolean withSignal) {
         String endpoint = buildBasicEndpoint(users, withSignal);
         endpoint += "&withGameMetas=true";
-        return LichessInterface.httpSyncGetWrapper(endpoint, userStatusArray);
+        return LichessInterface.httpSyncGetWrapper(endpoint, new StandardJsonParser<>(userStatusArray));
     }
 
     public static Map<LichessUsersEnums.VariantKey, ShortUserProfile[]> getAllTopTen() {
-        return (Map<LichessUsersEnums.VariantKey, ShortUserProfile[]>)LichessInterface.httpSyncGetWrapper("player", shortUserProfileMap);
+        return (Map<LichessUsersEnums.VariantKey, ShortUserProfile[]>)LichessInterface.httpSyncGetWrapper("player", new StandardJsonParser<>(shortUserProfileMap));
     }
 
     public static Leaderboard getOneLeaderboard(int numUsers, LichessUsersEnums.VariantKey chessVariant) {
-        return LichessInterface.httpSyncGetWrapper("player/top/" + numUsers + "/" + LichessUsersEnums.variantKeyText(chessVariant), shortUserProfileMap);
+        return LichessInterface.httpSyncGetWrapper("player/top/" + numUsers + "/" + LichessUsersEnums.variantKeyText(chessVariant), new StandardJsonParser<>(shortUserProfileMap));
     }
 
     /**
@@ -115,14 +116,14 @@ public class Users {
      * @return profile of the requested user.
      */
     public static UserProfile getUserPublicData(String username, boolean trophies) {
-        return LichessInterface.httpSyncGetWrapper("user/" + username + "?trophies=false", UserProfile.class);
+        return LichessInterface.httpSyncGetWrapper("user/" + username + "?trophies=false", new StandardJsonParser<>(UserProfile.class));
     }
 
     public static UserRatingHistory[] getUserRatingHistory(String username) {
-        return LichessInterface.httpSyncGetWrapper("user/" + username + "/rating-history", UserRatingHistory[].class);
+        return LichessInterface.httpSyncGetWrapper("user/" + username + "/rating-history", new StandardJsonParser<>(UserRatingHistory[].class));
     }
 
     public static UserPerfStats getUserPerfStats(String username, LichessUsersEnums.PerfVariant variant) {
-        return LichessInterface.httpSyncGetWrapper("user/" + username + "/perf/" + LichessUsersEnums.perfVariantText(variant), UserPerfStats.class);
+        return LichessInterface.httpSyncGetWrapper("user/" + username + "/perf/" + LichessUsersEnums.perfVariantText(variant), new StandardJsonParser<>(UserPerfStats.class));
     }
 }

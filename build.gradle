@@ -10,7 +10,7 @@ java {
 }
 
 group = 'niteknightt.chess'
-version = '0.4.002'
+version = '0.4.003'
 archivesBaseName = 'chess-lichessapi'
 
 repositories {

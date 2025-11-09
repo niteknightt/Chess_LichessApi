@@ -18,4 +18,7 @@ public class ExportedGame {
     public String fullId;
     public String winner;
     public String moves;
+    public List<Integer> clocks;
+    public String pgn;
+    public TimeFormat clock;
 }

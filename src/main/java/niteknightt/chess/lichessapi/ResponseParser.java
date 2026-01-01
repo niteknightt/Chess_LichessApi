@@ -1,5 +1,5 @@
 package niteknightt.chess.lichessapi;
 
 public interface ResponseParser<R> {
-    R parse(String json);
+    R parse(String json) throws Exception;
 }

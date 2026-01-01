@@ -1,0 +1,330 @@
+syntax = "proto3";
+
+package account;
+
+option java_package = "niteknightt.chess.lichessapi.objects";
+
+message GetMyProfileCount {
+    int32 all = 1;
+    int32 bookmark = 2;
+    int32 draw = 3;
+    int32 import = 4;
+    int32 loss = 5;
+    int32 me = 6;
+    int32 playing = 7;
+    int32 rated = 8;
+    int32 win = 9;
+    int32 ai = 10;
+    int32 drawH = 11;
+    int32 lossH = 12;
+    int32 winH = 13;
+}
+
+message GetMyProfilePerfType1 {
+    int32 games = 1;
+    int32 prog = 2;
+    int32 rating = 3;
+    int32 rd = 4;
+    bool prov = 5;
+    int32 rank = 6;
+}
+
+message GetMyProfilePerfType2 {
+    int32 runs = 1;
+    int32 score = 2;
+}
+
+message GetMyProfilePerfs {
+    GetMyProfilePerfType1 antichess = 1;
+    GetMyProfilePerfType1 atomic = 2;
+    GetMyProfilePerfType1 blitz = 3;
+    GetMyProfilePerfType1 bullet = 4;
+    GetMyProfilePerfType1 chess960 = 5;
+    GetMyProfilePerfType1 classical = 6;
+    GetMyProfilePerfType1 correspondence = 7;
+    GetMyProfilePerfType1 crazyhouse = 8;
+    GetMyProfilePerfType1 horde = 9;
+    GetMyProfilePerfType1 kingOfTheHill = 10;
+    GetMyProfilePerfType1 puzzle = 11;
+    GetMyProfilePerfType2 racer = 12;
+    GetMyProfilePerfType1 racingKings = 13;
+    GetMyProfilePerfType1 rapid = 14;
+    GetMyProfilePerfType2 storm = 15;
+    GetMyProfilePerfType2 streak = 16;
+    GetMyProfilePerfType1 threeCheck = 17;
+    GetMyProfilePerfType1 ultraBullet = 18;
+}
+
+message GetMyProfilePlayTime {
+    int32 total = 1;
+    int32 tv = 2;
+    int32 human = 3;
+}
+
+message GetMyProfileProfile {
+    string bio = 1;
+    int32 cfcRating = 2;
+    int32 dsbRating = 3;
+    int32 ecfRating = 4;
+    int32 fideRating = 5;
+    string flag = 6;
+    string links = 7;
+    string location = 8;
+    int32 rcfRating = 9;
+    string realName = 10;
+    int32 uscfRating = 11;
+}
+
+message GetMyProfileStreamerChannel {
+    string channel = 1;
+}
+
+message GetMyProfileStreamer {
+    GetMyProfileStreamerChannel twitch = 1;
+    GetMyProfileStreamerChannel youTube = 2;
+}
+
+enum GetMyProfileTitle {
+    NONE = 0;
+    GM = 1;
+    WGM = 2;
+    IM = 3;
+    WIM = 4;
+    FM = 5;
+    WFM = 6;
+    NM = 7;
+    CM = 8;
+    WCM = 9;
+    WNM = 10;
+    LM = 11;
+    BOT = 12;
+}
+
+message GetMyProfileTrophy {
+    string type = 1;
+    string perf = 2;
+    int32 top = 3;
+    string name = 4;
+    int64 date = 5;
+    string icon = 6;
+    string url = 7;
+
+}
+
+message GetMyProfileResponse {
+    string id = 1;
+    string url = 2;
+    string username = 3;
+    bool blocking = 4;
+    GetMyProfileCount count = 5;
+    int64 createdAt = 6;
+    bool disabled = 7;
+    string flair = 8;
+    bool followable = 9;
+    bool following = 10;
+    int32 patronColor = 11;
+    GetMyProfilePerfs perfs = 12;
+    string playing = 13;
+    GetMyProfilePlayTime playTime = 14;
+    GetMyProfileProfile profile = 15;
+    int64 seenAt = 16;
+    GetMyProfileStreamer streamer = 17;
+    bool streaming = 18;
+    GetMyProfileTitle title = 19;
+    bool tosViolation = 20;
+    bool verified = 21;
+    repeated GetMyProfileTrophy trophies = 22;
+}
+
+message GetMyEmailAddressResponse {
+    string email = 1;
+}
+
+enum GetMyPreferencesPieceSet {
+    PIECESET_NONE = 0;
+    cburnett = 1;
+    merida = 2;
+    alpha = 3;
+    pirouetti = 4;
+    chessnut = 5;
+    chess7 = 6;
+    reillycraig = 7;
+    companion = 8;
+    riohacha = 9;
+    kosal = 10;
+    leipzig = 11;
+    fantasy = 12;
+    spatial = 13;
+    california = 14;
+    pixel = 15;
+    maestro = 16;
+    fresca = 17;
+    cardinal = 18;
+    gioco = 19;
+    tatiana = 20;
+    staunty = 21;
+    governor = 22;
+    dubrovny = 23;
+    icpieces = 24;
+    shapes = 25;
+    letter = 26;
+}
+
+enum GetMyPreferencesPieceSet3d {
+    PIECESET3D_NONE = 0;
+    Basic = 1;
+    Wood = 2;
+    Metal = 3;
+    RedVBlue = 4;
+    ModernJade = 5;
+    ModernWood = 6;
+    Glass = 7;
+    Trimmed = 8;
+    Experimental = 9;
+    Staunton = 10;
+    CubesAndPi = 11;
+
+}
+
+enum GetMyPreferencesSoundSet {
+    SOUNDSET_NONE = 0;
+    silent = 1;
+    standard = 2;
+    piano = 3;
+    nes = 4;
+    sfx = 5;
+    futuristic = 6;
+    robot = 7;
+    music = 8;
+    speech = 9;
+}
+
+message GetMyPreferencesPrefs {
+    // Drop-down menu from username
+    GetMyPreferencesSoundSet soundSet = 1;
+    bool dark = 2; // Background set to dark mode.
+    string bgImg = 3; // Seems to be hard-coded to a specific image
+    string theme = 4;
+    string theme3d = 5;
+    bool is3d = 6;
+    GetMyPreferencesPieceSet pieceSet = 7;
+    GetMyPreferencesPieceSet3d pieceSet3d = 8;
+
+    // Display tab
+    int32 animation = 9; // 0=none 1=fast 2=normal 3=slow
+    // Missing: Material difference (no/yes)
+    bool highlight = 10; // Highlight last move and check.
+    bool destination = 11; // Show piece destinations.
+    int32 coords = 12; // Display coordinates: 0=no 1=inside 2=outside 3=all squares
+    // Missing: Move list while playing (never/slow games/always)
+    int32 pieceNotation = 13; // Piece notation: 0=piece symbol 1=piece letter
+    int32 zen = 14; // Zen mode: 0=no 1=yes 2=in game only
+    // Missing: Show board resize handle (no/initial position/always)
+    int32 ratings = 15; // Show player ratings: 0=no 1=yes 2=except in game
+    bool flairs = 16; // Show player flairs.
+
+    // Chess Clock tab
+    int32 clockTenths = 17; // Display 10th of second: 0=never 1=when time < 10 sec 2=always
+    bool clockBar = 18;
+    bool clockSound = 19;
+    int32 moretime = 20; // Allow more time: 1=never 2=casual games 3=always
+    // Missing: Show on left for mobile (no/yes)
+
+    // Game Behavior tab
+    int32 moveEvent = 21; // Move piece: 0=click twice 1=drag 2=both
+    bool premove = 22;
+    int32 takeback = 23; // Allow takebacks: 1=never 2=casual 3=always
+    int32 autoQueen = 24; // 1=never 2=when premoving 3=always
+    int32 autoThreefold = 25; // 1=never 2=when time < 30 sec 3=always
+    int32 submitMove = 26; // Confirm moves: binary unlimited/correspondence/classical/rapid/blitz
+    int32 confirmResign = 27; // Confirm resign and draw: 0=no 1=yes
+    int32 rookCastle = 28; // Castling: 0=move king 2 squares 1=move king onto rook
+    int32 keyboardMove = 29; // 0=no 1=yes
+    bool voiceMove = 30;
+    // Missing: Snap arrows to valid moves (no/yes)
+    int32 sayGG = 31; // Automatically say GG: 0=never 1=defeat 2=draw and defeat
+    // Missing: Scroll on board to replay moves (no/yes)
+
+    // Privacy tab
+    bool follow = 32; // Allow follows.
+    int32 challenge = 33; // Allow challenges: 1=never 2=if rating +-300 3=only friends 4=if registered 5=always
+    int32 message = 34; // Let players message: 1=existing conversations 2=friends 3=always
+    // Missing: Let others invite to study (never/friends/always)
+    int32 insightShare = 35; // Share insights with: 0=nobody 1=friends 2=everybody
+
+    // Unknown
+    int32 blindfold = 36; // Appears to always be zero. Mode can be set per game/puzzle.
+    bool captured = 37; // Value is true. Don't know what it is.
+    int32 replay = 38; // Value is 2. Don't know what it is.
+    bool transp = 39; // Value is false. Don't know what it is.
+}
+
+message GetMyPreferencesResponse {
+    string language = 1;
+    GetMyPreferencesPrefs prefs = 2;
+}
+
+message GetMyKidModeStatusResponse {
+    bool kid = 1;
+}
+
+enum TimelineEntryDataPerf {
+    TIMELINEENTRYDATAPERF_NONE = 0;
+    ultraBullet = 1;
+    bullet = 2;
+    blitz = 3;
+    rapid = 4;
+    classical = 5;
+    correspondence = 6;
+    chess960 = 7;
+    crazyhouse = 8;
+    antichess = 9;
+    atomic = 10;
+    horde = 11;
+    kingOfTheHill = 12;
+    racingKings = 13;
+    threeCheck = 14;
+}
+
+message TimelineEntryData {
+    string u1 = 1; // follow
+    string u2 = 2; // follow
+    string teamId = 3; // team-join, team-create
+    string userId = 4; // team-join, team-create, forum-post, ublog-post, tour-join, simul-create, simul-join, study-like, plan-start, plan-renew, ublog-post-like, stream-start
+    string postId = 5; // forum-post
+    string topicId = 6; // forum-post
+    string topicName = 7; // forum-post
+    string id = 8; // blog-post, ublog-post, ublog-post-like, stream-start
+    string slug = 9; // blog-post, ublog-post
+    string title = 10; // blog-post, ublog-post, ublog-post-like, stream-start
+    string tourId = 11; // tour-join
+    string tourName = 12; // tour-join
+    string fullId = 13; // game-end
+    string opponent = 14; // game-end
+    TimelineEntryDataPerf perf = 15; // game-end
+    bool win = 16; // game-end
+    string simulId = 17; // simul-create, simul-join
+    string simulName = 18; // simul-create, simul-join
+    string studyId = 19; // study-like
+    string studyName = 20; // study-like
+    int32 months = 21; // plan-renew
+}
+
+message TimelineEntry {
+    string type = 1;
+    TimelineEntryData data = 2;
+    int64 date = 3;
+}
+
+message TimelineUser {
+    string id = 1;
+    string name = 2;
+    string flair = 3;
+    int32 patronColor = 4;
+    GetMyProfileTitle title = 5;
+}
+
+message GetMyTimelineResponse {
+    repeated TimelineEntry entries = 1;
+    map<string, TimelineUser> users = 2;
+}

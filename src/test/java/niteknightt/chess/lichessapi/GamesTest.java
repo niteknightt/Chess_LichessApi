@@ -1,13 +1,20 @@
 package niteknightt.chess.lichessapi;
 
+import com.github.bhlangonijr.chesslib.pgn.PgnHolder;
 import niteknightt.chess.common.AppLogger;
 import niteknightt.chess.common.Enums;
 import niteknightt.chess.common.Settings;
 import niteknightt.chess.lichessapi.functions.Games;
 import niteknightt.chess.lichessapi.functions.Users;
 import niteknightt.chess.lichessapi.objects.*;
+import niteknightt.chess.lichessapi.objects.Games.*;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -16,72 +23,52 @@ import java.util.Map;
 public class GamesTest {
 
     @Test
-    public void testExportLastGameOfAUser() {
+    public void testExportLastGameOfAUser() throws IOException {
         String userForTest1 = "elihaber";
         Settings.createInstance(Enums.SettingsType.COMMON);
         AppLogger.createInstance(Enums.SettingsType.COMMON, Enums.LogLevel.DEBUG, false);
-        ExportedGame game = Games.exportLastGameOfAUser(userForTest1);
-        System.out.println("sdf");
+        ExportLastGameOfAUserResponse game = Games.exportLastGameOfAUser(userForTest1);
+
+        Path tempFile = Files.createTempFile("game_pgn", ".txt");
+
+        try {
+            Files.writeString(tempFile, game.getGames());
+
+            PgnHolder holder = new PgnHolder(tempFile.toAbsolutePath().toString());
+            Assertions.assertDoesNotThrow(() -> {
+                holder.loadPgn();
+            }, "The PGN is invalid");
+        }
+        finally {
+            Files.deleteIfExists(tempFile);
+        }
     }
 
     @Test
-    public void testExportLastGamesOfAUser() {
+    public void testExportLastGamesOfAUser() throws IOException {
         String userForTest1 = "elihaber";
         Settings.createInstance(Enums.SettingsType.COMMON);
         AppLogger.createInstance(Enums.SettingsType.COMMON, Enums.LogLevel.DEBUG, false);
-        List<ExportedGame> games = Games.exportLastGamesOfAUser(userForTest1, 10);
-        System.out.println("sdf");
-    }
+        ExportLastGamesOfAUserResponse games = Games.exportLastGamesOfAUser(userForTest1, 10);
 
-    @Test
-    public void testGetAllTopTen() {
-        String userForTest1 = "elihaber";
-        String[] usersForTest2 = {"elihaber", "niteknightt"};
-        Settings.createInstance(Enums.SettingsType.COMMON);
-        AppLogger.createInstance(Enums.SettingsType.COMMON, Enums.LogLevel.DEBUG, false);
-        Map<LichessUsersEnums.VariantKey, ShortUserProfile[]> topTen = Users.getAllTopTen();
-        System.out.println("sdf");
-    }
+        Path tempFile = Files.createTempFile("game_pgn", ".txt");
 
-    @Test
-    public void testGetOneLeaderboard() {
-        String userForTest1 = "elihaber";
-        String[] usersForTest2 = {"elihaber", "niteknightt"};
-        Settings.createInstance(Enums.SettingsType.COMMON);
-        AppLogger.createInstance(Enums.SettingsType.COMMON, Enums.LogLevel.DEBUG, false);
-        Map<LichessUsersEnums.VariantKey, ShortUserProfile[]> topTen = Users.getAllTopTen();
-        System.out.println("sdf");
-    }
+        try {
+            for (int i = 0; i < games.getGamesCount(); ++i) {
+                if (i != 0) {
+                    Files.writeString(tempFile, "\n", StandardOpenOption.APPEND);
+                }
+                Files.writeString(tempFile, games.getGames(i), StandardOpenOption.APPEND);
+            }
 
-    @Test
-    public void testGetUserPublicData() {
-        String userForTest1 = "elihaber";
-        String[] usersForTest2 = {"elihaber", "niteknightt"};
-        Settings.createInstance(Enums.SettingsType.COMMON);
-        AppLogger.createInstance(Enums.SettingsType.COMMON, Enums.LogLevel.DEBUG, false);
-        UserProfile profile = Users.getUserPublicData("ted320", true);
-        System.out.println("sdf");
-    }
-
-    @Test
-    public void testGetUserRatingHistory() {
-        String userForTest1 = "elihaber";
-        String[] usersForTest2 = {"elihaber", "niteknightt"};
-        Settings.createInstance(Enums.SettingsType.COMMON);
-        AppLogger.createInstance(Enums.SettingsType.COMMON, Enums.LogLevel.DEBUG, false);
-        UserRatingHistory[] ratingHistory = Users.getUserRatingHistory("ted320");
-        Map<Date, Integer> ratings = ratingHistory[0].getRatings();
-        System.out.println("sdf");
-    }
-
-    @Test
-    public void testGetUserPerfStats() {
-        String userForTest1 = "elihaber";
-        String[] usersForTest2 = {"elihaber", "niteknightt"};
-        Settings.createInstance(Enums.SettingsType.COMMON);
-        AppLogger.createInstance(Enums.SettingsType.COMMON, Enums.LogLevel.DEBUG, false);
-        UserPerfStats perfStats = Users.getUserPerfStats("elihaber", LichessUsersEnums.PerfVariant.RAPID);
-        System.out.println("sdf");
+            PgnHolder holder = new PgnHolder(tempFile.toAbsolutePath().toString());
+            Assertions.assertDoesNotThrow(() -> {
+                holder.loadPgn();
+            }, "The PGN is invalid");
+        }
+        finally {
+            Files.deleteIfExists(tempFile);
+        }
     }
 
 }

@@ -1,33 +1,34 @@
 package niteknightt.chess.lichessapi.functions;
 
 import niteknightt.chess.lichessapi.*;
-import niteknightt.chess.lichessapi.objects.*;
+import niteknightt.chess.lichessapi.objects.Account.*;
 
 public class Account {
 
-    public static UserProfile getMyProfile() {
-        return (UserProfile) LichessInterface.httpSyncGetWrapper("account", new StandardJsonParser<>(UserProfile.class));
+    public static GetMyProfileResponse getMyProfile() {
+        return LichessInterface.httpSyncGetWrapper("account", new StandardJsonParser<>(GetMyProfileResponse.class));
     }
 
     public static String getMyEmailAddress() {
-        Email email = (Email)LichessInterface.httpSyncGetWrapper("account/email", new StandardJsonParser<>(Email.class));
-        return email == null ? null : email.email;
+        GetMyEmailAddressResponse email = LichessInterface.httpSyncGetWrapper("account/email", new StandardJsonParser<>(GetMyEmailAddressResponse.class));
+        return email.getEmail() == null ? null : email.getEmail();
     }
 
-    public static PrefsAndLang getMyPreferences() {
-        return (PrefsAndLang)LichessInterface.httpSyncGetWrapper("account/preferences", new StandardJsonParser<>(PrefsAndLang.class));
+    public static GetMyPreferencesResponse getMyPreferences() {
+        GetMyPreferencesResponse prefs =  LichessInterface.httpSyncGetWrapper("account/preferences", new StandardJsonParser<>(GetMyPreferencesResponse.class));
+        return prefs;
     }
 
     public static boolean getMyKidModeStatus() {
-        KidModeStatus kidModeStatus = (KidModeStatus)LichessInterface.httpSyncGetWrapper("account/kid", new StandardJsonParser<>(KidModeStatus.class));
-        return kidModeStatus == null ? false : kidModeStatus.kid;
+        GetMyKidModeStatusResponse kidModeStatus = LichessInterface.httpSyncGetWrapper("account/kid", new StandardJsonParser<>(GetMyKidModeStatusResponse.class));
+        return kidModeStatus == null ? false : kidModeStatus.getKid();
     }
 
     public static boolean setMyKidModeStatus(boolean val) {
         return LichessInterface.doHttpSyncPost("account/kid?v=" + val);
     }
 
-    public static Timeline getMyTimeline(long fromTimestamp, int numEvents) {
+    public static GetMyTimelineResponse getMyTimeline(long fromTimestamp, int numEvents) {
         boolean timestampAdded = false;
         String endpoint = "timeline?";
         if (fromTimestamp != -1) {
@@ -38,6 +39,6 @@ public class Account {
             endpoint += (timestampAdded ? "&" : "");
             endpoint += "nb=" + numEvents;
         }
-        return (Timeline) LichessInterface.httpSyncGetWrapper(endpoint, new StandardJsonParser<>(Timeline.class));
+        return LichessInterface.httpSyncGetWrapper(endpoint, new StandardJsonParser<>(GetMyTimelineResponse.class));
     }
 }

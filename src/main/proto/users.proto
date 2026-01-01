@@ -1,0 +1,162 @@
+syntax = "proto3";
+
+package account;
+
+import "account.proto";
+import "google/protobuf/timestamp.proto";
+
+option java_package = "niteknightt.chess.lichessapi.objects";
+
+message RealTimeUserStatus {
+    string id = 1;
+    string name = 2;
+    string flair = 3;
+    int32 patronColor = 4;
+    bool streaming = 5;
+    GetMyProfileTitle title = 6;
+    // If not playing, blank.
+    // If playing, if withGameMetas=true is included then it will be like:
+    // "{"id":"abcdef","clock":"1+0"}"
+    // If withGameIds=true, it will be "true", and playingId will have the game ID.
+    // This overrides withGameMetas=true so if both are included, this is what will
+    // happen.
+    string playing = 7; // blank or "false" if not playing, "true"
+    string playingId = 8;
+    // Only returned if withSignal=true is included.
+    int32 signal = 9;
+}
+
+message GetRealTimeUserStatusResponse {
+    repeated RealTimeUserStatus statuses = 1;
+}
+
+message GetAllTopTenUserPerfs {
+    int32 progress = 1;
+    int32 rating = 2;
+}
+
+message GetAllTopTenUser {
+    string id = 1;
+    string username = 2;
+    bool online = 3;
+    int32 patronColor = 4;
+    map<string, GetAllTopTenUserPerfs> perfs = 5;
+    GetMyProfileTitle title = 6;
+}
+
+message GetAllTopTenResponse {
+    repeated GetAllTopTenUser antichess = 1;
+    repeated GetAllTopTenUser atomic = 2;
+    repeated GetAllTopTenUser blitz = 3;
+    repeated GetAllTopTenUser bullet = 4;
+    repeated GetAllTopTenUser chess960 = 5;
+    repeated GetAllTopTenUser classical = 6;
+    repeated GetAllTopTenUser crazyhouse = 7;
+    repeated GetAllTopTenUser horde = 8;
+    repeated GetAllTopTenUser kingOfTheHill = 9;
+    repeated GetAllTopTenUser racingKings = 10;
+    repeated GetAllTopTenUser rapid = 11;
+    repeated GetAllTopTenUser threeCheck = 12;
+    repeated GetAllTopTenUser ultraBullet = 13;
+}
+
+message GetOneLeaderboardResponse {
+    repeated GetAllTopTenUser users = 1;
+}
+
+message HistoricalPoints {
+    int32 year  = 1;
+    int32 month = 2;
+    int32 day   = 3;
+    int32 value = 4;
+}
+
+message VariantRatingHistory {
+    string name = 1;
+    repeated HistoricalPoints points = 2;
+}
+
+message GetUserRatingHistoryResponse {
+    repeated VariantRatingHistory ratingHistory = 1;
+}
+
+message PerfStatsPerfDetails {
+    float deviation = 1;
+    bool provisional = 2;
+    float rating = 3;
+}
+
+message PerfStatsPerf {
+    PerfStatsPerfDetails glicko = 1;
+    int32 nb = 2;
+    int32 progress = 3;
+}
+
+message PerfStatsCounts {
+    int32 all = 1;
+    int32 berserk = 2;
+    int32 disconnects = 3;
+    int32 draw = 4;
+    int32 loss = 5;
+    float opAvg = 6;
+    int32 rated = 7;
+    int32 seconds = 8;
+    int32 tour = 9;
+    int32 win = 10;
+}
+
+message PerfStatsStreakDetails {
+    int32 v = 1;
+    PerfStatsResults from = 2;
+    PerfStatsResults to = 3;
+}
+
+message PerfStatsStreakInfo {
+    PerfStatsStreakDetails cur = 1;
+    PerfStatsStreakDetails max = 2;
+}
+
+message PerfStatsPlayStreak {
+    PerfStatsStreakInfo nb = 1;
+    PerfStatsStreakInfo time = 2;
+    google.protobuf.Timestamp lastDate = 3;
+}
+
+message PerfStatsResultStreak {
+    PerfStatsStreakInfo loss = 1;
+    PerfStatsStreakInfo win = 2;
+}
+
+message PerfStatsResults {
+    google.protobuf.Timestamp at = 1;
+    string gameId = 2;
+    TimelineUser opId = 3;
+    int32 opRating = 4;
+    int32 int = 5;
+}
+
+message PerfStatsBestWorst {
+    repeated PerfStatsResults results = 1;
+}
+
+message PerfStatsStats {
+    PerfStatsBestWorst bestWins = 1;
+    PerfStatsCounts count = 2;
+    PerfStatsPlayStreak playStreak = 3;
+    PerfStatsResultStreak resultStreak = 4;
+    PerfStatsBestWorst worstLosses = 5;
+    PerfStatsResults highest = 6;
+    PerfStatsResults lowest = 7;
+}
+
+message PerfStatsUser {
+    string name = 1;
+}
+
+message GetUserPerfStatsResponse {
+    float percentile = 1;
+    PerfStatsPerf perf = 2;
+    int32 rank = 3;
+    PerfStatsStats stat = 4;
+    PerfStatsUser user = 5;
+}

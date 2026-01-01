@@ -187,7 +187,7 @@ public class LichessInterface {
     }
 
     public static UserProfile getProfile() {
-        return (UserProfile)httpSyncGetWrapper("account", new StandardJsonParser<>(UserProfile.class));
+        return (UserProfile)httpSyncGetWrapper("account", new GsonTypeParser<>(UserProfile.class));
     }
 
     public static UserProfile getUserPublicData(String username) {
@@ -199,7 +199,7 @@ public class LichessInterface {
         if (includeTrophies) {
             url += "?trophies=true";
         }
-        return (UserProfile)httpSyncGetWrapper(url, new StandardJsonParser<>(UserProfile.class));
+        return (UserProfile)httpSyncGetWrapper(url, new GsonTypeParser<>(UserProfile.class));
     }
 
     public static void acceptChallenge(String challengeId) throws LichessApiException {
@@ -260,14 +260,14 @@ public class LichessInterface {
     }
 
     public static LichessChatItem[] fetchGameChat(String gameId) {
-        return (LichessChatItem[])httpSyncGetWrapper("bot/game/" + gameId + "/chat", new StandardJsonParser<>(LichessChatItem[].class));
+        return (LichessChatItem[])httpSyncGetWrapper("bot/game/" + gameId + "/chat", new GsonTypeParser<>(LichessChatItem[].class));
     }
 
     public static LichessEvent getEvent() {
-        return (LichessEvent)httpSyncGetWrapper("stream/event", new StandardJsonParser<>(LichessEvent.class));
+        return (LichessEvent)httpSyncGetWrapper("stream/event", new GsonTypeParser<>(LichessEvent.class));
     }
 
     public static LichessUserList autocompleteUsernames(String startText) {
-        return (LichessUserList)httpSyncGetWrapper("player/autocomplete?term=" + startText + "&object=true&friend=false", new StandardJsonParser<>(LichessUserList.class));
+        return (LichessUserList)httpSyncGetWrapper("player/autocomplete?term=" + startText + "&object=true&friend=false", new GsonTypeParser<>(LichessUserList.class));
     }
 }
